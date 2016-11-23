@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="" ng-app="app">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GitHub Profiler</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+</head>
+
+<body ng-controller="GithubController as github">
+    <div class="container">
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="well">
+                    <h1>GitHub Profiler</h1>
+                    <p>Find out information of any Github user!</p>
+                </div>
+            </div>
+            <div class="panel-body input-group">
+                <input type="text" class="form-control" placeholder="Enter Name Here" aria-describedby="basic-addon2" ng-model="github.username">
+                <span class="input-group-addon" id="basic-addon2" ng-click="github.callGithubApi()">Go!</span>
+            </div>
+        </div>
+        <div ng-if="github.data">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <img ng-src={{github.data.avatar_url}} alt="" class="img-circle" height="225px" width="225px">
+                        <hr>
+                        <p>{{github.data.name}}</p>
+                        <p>{{github.data.login }}</p>
+                        <p>{{github.data.location}}</p>
+                        <p ng-if="github.data.hireable">Available for Hire</p>
+                        <p ng-if="!github.data.hireable" >Unavailable for Hire</p>
+                        <p>{{github.data.created_at}}</p>
+                    </div>
+                    <div class="col-sm-3 well well-lg text-center">
+                        <h5>Followers</h5>
+                        <p>{{github.data.followers}}</p>
+                    </div>
+                    <div class="col-sm-3 well well-lg text-center">
+                        <h5>Following</h5>
+                        <p>{{github.data.following}}</p>
+                    </div>
+                    <div class="col-sm-3 well well-lg text-center">
+                        <h5>Public Repositories</h5>
+                        <p>{{github.data.public_repos}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery -->
+    <script src="//code.jquery.com/jquery.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="app/app.module.js"></script>
+    <script src="app/home/home.controller.js"></script>
+</body>
+
+</html>
